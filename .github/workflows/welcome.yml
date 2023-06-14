@@ -1,8 +1,20 @@
-# Set up name of action
+# Create workflow file
+# Set up name of workflow
 name: Post welcome comment
-# trigger action when open pull request (could do on push, review PR, etc.)
+# Trigger action when open pull request (could do on push, review PR, etc.)
 on:
   pull_request:
     types: [opened]
+# Gives workflow permission to write to pull requests (to create welcome comment)
 permissions:
-  pull-requests: write #action requires write access to pull requests, sets permission to write to run action
+  pull-requests: write #action requires write access to pull requests
+
+# Set up jobs to run
+# Job: set of steps in workflow that execute on a runner
+# Runner: server that runs when workflows are triggered
+# Workflows have jobs, jobs have steps, steps execute in order
+
+jobs:
+  build:
+  name: Post welcome comment
+  runs-on: ubuntu-latest #job runner
