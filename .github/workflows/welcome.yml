@@ -16,18 +16,18 @@ permissions:
 
 jobs:
   build:
-  name: Post welcome comment
-  runs-on: ubuntu-latest #job runner
+    name: Post welcome comment
+    runs-on: ubuntu-latest #job runner
 
-  #add steps to job
-  # Steps are shell scripts or actions to be run, each step must pass to run the next
-  # Steps can be used from same repo, another public repo, or published Docker container image
-  # Post comment on pull request using bash script and GitHub CLI (gh)
-  steps:
-          #command to run
-    - run: gh pr comment $PR_URL --body "Welcome to the repo!"
-      #environment variables passed to the step
-      env: 
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} #GitHub API access token
-        PR_URL: ${{ github.event.pull_request.html_url }} #url of pull request
+    #add steps to job
+    # Steps are shell scripts or actions to be run, each step must pass to run the next
+    # Steps can be used from same repo, another public repo, or published Docker container image
+    # Post comment on pull request using bash script and GitHub CLI (gh)
+    steps:
+      #command to run
+      - run: gh pr comment $PR_URL --body "Welcome to the repo!"
+        #environment variables passed to the step
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} #GitHub API access token
+          PR_URL: ${{ github.event.pull_request.html_url }} #url of pull request
 
