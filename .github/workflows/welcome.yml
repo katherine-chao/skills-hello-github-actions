@@ -1,0 +1,8 @@
+# Set up name of action
+name: Post welcome comment
+# trigger action when open pull request (could do on push, review PR, etc.)
+on:
+  pull_request:
+    types: [opened]
+permissions:
+  pull-requests: write #action requires write access to pull requests, sets permission to write to run action
