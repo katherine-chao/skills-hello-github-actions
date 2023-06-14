@@ -1,0 +1,33 @@
+# Create workflow file
+# Set up name of workflow
+name: Post welcome comment
+# Trigger action when open pull request (could do on push, review PR, etc.)
+on:
+  pull_request:
+    types: [opened]
+# Gives workflow permission to write to pull requests (to create welcome comment)
+permissions:
+  pull-requests: write #action requires write access to pull requests
+
+# Set up jobs to run
+# Job: set of steps in workflow that execute on a runner
+# Runner: server that runs when workflows are triggered
+# Workflows have jobs, jobs have steps, steps execute in order
+
+jobs:
+  build:
+  name: Post welcome comment
+  runs-on: ubuntu-latest #job runner
+
+  #add steps to job
+  # Steps are shell scripts or actions to be run, each step must pass to run the next
+  # Steps can be used from same repo, another public repo, or published Docker container image
+  # Post comment on pull request using bash script and GitHub CLI (gh)
+  steps:
+          #command to run
+    - run: gh pr comment $PR_URL --body "Welcome to the repo!"
+      #environment variables passed to the step
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} #GitHub API access token
+        PR_URL: ${{ github.event.pull_request.html_url }} #url of pull request
+
